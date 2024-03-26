@@ -67,8 +67,22 @@ void Error_Handler(void);
 #define RED_R_GPIO_Port GPIOA
 #define YELLOW_R_Pin GPIO_PIN_7
 #define YELLOW_R_GPIO_Port GPIOA
+#define A_Pin GPIO_PIN_0
+#define A_GPIO_Port GPIOB
+#define B_Pin GPIO_PIN_1
+#define B_GPIO_Port GPIOB
+#define C_Pin GPIO_PIN_2
+#define C_GPIO_Port GPIOB
 #define GREEN_R_Pin GPIO_PIN_8
 #define GREEN_R_GPIO_Port GPIOA
+#define D_Pin GPIO_PIN_3
+#define D_GPIO_Port GPIOB
+#define E_Pin GPIO_PIN_4
+#define E_GPIO_Port GPIOB
+#define F_Pin GPIO_PIN_5
+#define F_GPIO_Port GPIOB
+#define G_Pin GPIO_PIN_6
+#define G_GPIO_Port GPIOB
 
 /* USER CODE BEGIN Private defines */
 
