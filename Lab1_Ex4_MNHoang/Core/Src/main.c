@@ -73,11 +73,11 @@ int main(void)
     {
       counter = 0;
     }
-    display7SEG(counter++);
+    display7SEG_A(counter++);
     HAL_Delay(1000);
   }
 }
-void display7SEG(int num)
+void display7SEG_A(int num)
 {
   switch (num)
   {
