@@ -63,15 +63,15 @@ static void MX_GPIO_Init(void);
  */
 typedef enum
 {
-  STATE_GREEN,
-  STATE_YELLOW,
-  STATE_RED,
-  STATE_YELLOW2
+  STATE_1,
+  STATE_2,
+  STATE_3,
+  STATE_4
 } TrafficLightState;
 
 int counter = -1;
 int counter2 = 5;
-TrafficLightState state = STATE_GREEN;
+TrafficLightState state = STATE_1;
 
 int main(void)
 {
@@ -83,65 +83,48 @@ int main(void)
   {
     switch (state)
     {
-    case STATE_GREEN:
+    case STATE_1:
       if (counter <= 0)
       {
-        // default GREEN ON, alternate RED ON
-        HAL_GPIO_WritePin(GPIOA, GREEN_Pin, GPIO_PIN_SET);      // Green on
-        HAL_GPIO_WritePin(GPIOA, GREEN_R_Pin, GPIO_PIN_RESET);  // Green2 off
-        HAL_GPIO_WritePin(GPIOA, YELLOW_Pin, GPIO_PIN_RESET);   // Yellow off
-        HAL_GPIO_WritePin(GPIOA, YELLOW_R_Pin, GPIO_PIN_RESET); // Yellow2 off
-        HAL_GPIO_WritePin(GPIOA, RED_Pin, GPIO_PIN_RESET);      // Red off
-        HAL_GPIO_WritePin(GPIOA, RED_R_Pin, GPIO_PIN_SET);      // Red2 on
-        state = STATE_YELLOW;
+        HAL_GPIO_WritePin(GPIOA, GREEN_Pin | RED_R_Pin, GPIO_PIN_SET);
+        HAL_GPIO_WritePin(GPIOA, GREEN_R_Pin | YELLOW_Pin | YELLOW_R_Pin | RED_Pin, GPIO_PIN_RESET);
+        state = STATE_2;
         counter = 3;
         counter2 = 5;
       }
       break;
 
-    case STATE_YELLOW:
+    case STATE_2:
       if (counter <= 0)
       {
-        // default YELLOW transition
-        HAL_GPIO_WritePin(GPIOA, GREEN_Pin, GPIO_PIN_RESET);    // Green off
-        HAL_GPIO_WritePin(GPIOA, GREEN_R_Pin, GPIO_PIN_RESET);  // Green2 off
-        HAL_GPIO_WritePin(GPIOA, YELLOW_Pin, GPIO_PIN_SET);     // Yellow on
-        HAL_GPIO_WritePin(GPIOA, YELLOW_R_Pin, GPIO_PIN_RESET); // Yellow2 off
-        HAL_GPIO_WritePin(GPIOA, RED_Pin, GPIO_PIN_RESET);      // Red off
-        HAL_GPIO_WritePin(GPIOA, RED_R_Pin, GPIO_PIN_SET);      // Red2 on
-        state = STATE_RED;
+        HAL_GPIO_WritePin(GPIOA, YELLOW_Pin | RED_R_Pin, GPIO_PIN_SET);
+        HAL_GPIO_WritePin(GPIOA, GREEN_Pin | GREEN_R_Pin | YELLOW_R_Pin | RED_Pin, GPIO_PIN_RESET);
+
+        state = STATE_3;
         counter = 2;
         counter2 = 2;
       }
       break;
 
-    case STATE_RED:
+    case STATE_3:
       if (counter <= 0)
       {
-        // default RED ON, alternate GREEN ON
-        HAL_GPIO_WritePin(GPIOA, GREEN_Pin, GPIO_PIN_RESET);    // Green off
-        HAL_GPIO_WritePin(GPIOA, GREEN_R_Pin, GPIO_PIN_SET);    // Green2 on
-        HAL_GPIO_WritePin(GPIOA, YELLOW_Pin, GPIO_PIN_RESET);   // Yellow off
-        HAL_GPIO_WritePin(GPIOA, YELLOW_R_Pin, GPIO_PIN_RESET); // Yellow2 off
-        HAL_GPIO_WritePin(GPIOA, RED_Pin, GPIO_PIN_SET);        // Red on
-        HAL_GPIO_WritePin(GPIOA, RED_R_Pin, GPIO_PIN_RESET);    // Red2 off
-        state = STATE_YELLOW2;
+        HAL_GPIO_WritePin(GPIOA, GREEN_R_Pin | RED_Pin, GPIO_PIN_SET);
+        HAL_GPIO_WritePin(GPIOA, GREEN_Pin | YELLOW_Pin | YELLOW_R_Pin | RED_R_Pin, GPIO_PIN_RESET);
+
+        state = STATE_4;
         counter = 5;
         counter2 = 3;
       }
       break;
 
-    case STATE_YELLOW2:
+    case STATE_4:
       if (counter2 <= 0)
       {
-        // alternate YELLOW transition
-        HAL_GPIO_WritePin(GPIOA, GREEN_Pin, GPIO_PIN_RESET);   // Green off
-        HAL_GPIO_WritePin(GPIOA, GREEN_R_Pin, GPIO_PIN_RESET); // Green2 off
-        HAL_GPIO_WritePin(GPIOA, YELLOW_Pin, GPIO_PIN_RESET);  // Yellow off
-        HAL_GPIO_WritePin(GPIOA, YELLOW_R_Pin, GPIO_PIN_SET);  // Yellow2 on
-        HAL_GPIO_WritePin(GPIOA, RED_Pin, GPIO_PIN_SET);       // Red on
-        HAL_GPIO_WritePin(GPIOA, RED_R_Pin, GPIO_PIN_RESET);   // Red2 off
-        state = STATE_GREEN;
+        HAL_GPIO_WritePin(GPIOA, YELLOW_R_Pin | RED_Pin, GPIO_PIN_SET);
+        HAL_GPIO_WritePin(GPIOA, GREEN_Pin | GREEN_R_Pin | YELLOW_Pin | RED_R_Pin, GPIO_PIN_RESET);
+
+        state = STATE_1;
         counter = 2;
         counter2 = 2;
       }
