@@ -104,6 +104,7 @@ int main(void)
 
   while (1)
   {
+    // Example of how to turn on and off the LEDs
     //   HAL_GPIO_WritePin(GPIOA, _12_Pin, GPIO_PIN_SET);
     //   HAL_Delay(1000);
 
@@ -257,7 +258,6 @@ void setNumberOnClock(int num)
   if (num == 11)
     HAL_GPIO_WritePin(GPIOA, _11_Pin, GPIO_PIN_SET);
 }
-
 void clearNumberOnClock(int num)
 {
   if (num == 12)
