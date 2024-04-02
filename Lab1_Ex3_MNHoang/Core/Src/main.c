@@ -48,6 +48,9 @@
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
+void display7SEG(int num);
+void display7SEG_B(int num);
+
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -131,7 +134,7 @@ int main(void)
       break;
     }
 
-    display7SEG_A(counter);
+    display7SEG(counter);
     display7SEG_B(counter2);
     counter--;
     counter2--;
@@ -147,7 +150,7 @@ int main(void)
   }
 }
 
-void display7SEG_A(int num)
+void display7SEG(int num)
 {
   switch (num)
   {
